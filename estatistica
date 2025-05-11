@@ -1,0 +1,101 @@
+from math import sqrt
+
+def isPar(num):
+    if num%2 == 0:
+        return True
+    else:
+        return False
+
+def Homegeinidade(num):
+    if num <= 30:
+        return "Homogêneo"
+    else:
+        return "Heterogêneo"
+
+willian = [] 
+#Lista normal
+xix2 = []
+#lista para calcular  variança amostral
+somatoria = 0
+quantidadeWIllian= 0
+#quantidadeWilliam e pra as quantidades de numeros na lista
+SomaWillian = 0 
+#e a variavel  pra somar os numeros
+contagem = 1
+# e a variavel para contar os numeros e ele ja inicia pelo 1
+media = 0
+#variavel pra media
+
+
+
+
+#função para verificar se o numero e par ou impar
+while True:
+    try:
+        willian.append(float(input(f"{contagem}ª: ")))
+    except:
+        break
+    contagem += 1
+# esse e o laço de repetição  que faz a contagem dos numeros
+quantidadeWIllian = len(willian)
+#len e pra ver quantidade de numeros da lista
+SomaWillian = sum(willian)
+#sum e pra somar os numeros da lista
+media = SomaWillian / quantidadeWIllian
+#media entre soma dos numeros da listaa /
+#Media=tudo acima
+#Mediana=abaixo
+willianOrdenada = sorted(willian)
+
+print(willianOrdenada)
+if isPar(len(willian)):
+    numMeio1 = willianOrdenada[int(len(willianOrdenada)/2)-1]
+    numMeio2 = willianOrdenada[int(len(willianOrdenada)/2)]
+    mediana = float((numMeio1+numMeio2)/2)
+    #mediana pra numero par
+else:
+    numMeio = int(len(willianOrdenada)/2)
+    mediana = willianOrdenada[numMeio]
+    #mediana para numeros não pares
+
+# Fórmula= S²(X) = Σ de N ( X i - X )² / (N-1)
+#S²-Variancia (Variancia)
+#Σ de N=(N=Numero de dados) soma de todos os numeros.
+#X i=Valor analisado (cada valor individual)
+#X-Média
+
+
+# [1,2,3,4]
+#media = 2,5
+#somatoria [(1-2,5)**2+(2-2,5)**2+(3-2,5)**2+(3-2,5)**2+(4-2,5)**2/N-1=Resultado.
+# Xi =  1 , 2 , 3 , 4
+
+# escrevendo um baguilgoh
+
+# for i in willian: [1,2,3,4]
+
+#quantidadeWillian=N
+for i in willian:
+    xix2.append((i - media)**2)
+
+somatoria = sum(xix2)
+
+S_ao_2 = somatoria / (quantidadeWIllian-1)
+
+#DesvioPadraoCalculo
+desvioPadrao = sqrt(S_ao_2) 
+
+
+#Cristo vive
+#amém
+
+cv = (desvioPadrao/media)*100
+
+print(f'''
+Media: {media}
+Mediana: {mediana}
+Variancia amostral: {S_ao_2:.2f}
+Desvio Padrão: {desvioPadrao:.2f}
+Coeficiente de variação: {cv:.2f}%
+O conjunto de dados é {Homegeinidade(cv)}
+''')
